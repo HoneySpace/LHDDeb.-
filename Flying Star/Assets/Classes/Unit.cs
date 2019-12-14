@@ -5,6 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public Passager passager;
+    public bool ItTer = false;
     void Start()
     {
         passager.Start();
