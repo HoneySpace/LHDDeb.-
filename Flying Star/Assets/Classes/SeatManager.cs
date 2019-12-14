@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SeatManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class SeatManager : MonoBehaviour
     public float space = 1;
     public static int Index;
     int count;
+    public Text Discription;
     void Awake()
     {
         Index =Random.Range(0, CountOfSeatsInX * 2 * CountOfSeatsInY);
@@ -35,20 +37,48 @@ public class SeatManager : MonoBehaviour
                 if (count != Index)
                 {
                     passagers[count] = new Passager(holder, false);
-                    holder.passager = passagers[count];
+                    holder.passager = passagers[count];                
                 }
                 else
                 {
                     holder.passager = passagers[Index];
+                    holder.ItTer = true;
                     passagers[Index].SetHolder(holder);
                 }
                 count++;
-            }
+            }        
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         
     }
+    // Update is called once per frame
+    void Update()
+    {
+        List<string> Tips = new List<string>();
+        foreach (Sprite sprite in Passager.TerrorTipsSet)
+        {
+            string[] s = sprite.name.Split(' ');
+            for (int i = 0; i < s.Length; i++)
+                if (
+                    s[i] != "Girl"
+                    &&
+                    s[i] != "Men"
+                    &&
+                    s[i] != "Tip"
+                    &&
+                    s[i] != "Body"
+                    &&
+                    s[i] != "Head"
+                  )
+                {
+                    Tips.Add(s[i]);
+                    Tips.Add(" ");
+                }
+        }
+        Discription.text = "";
+        foreach (string s in Tips)
+            Discription.text += s;
+    }
+   
 }
