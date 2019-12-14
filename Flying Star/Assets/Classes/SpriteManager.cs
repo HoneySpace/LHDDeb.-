@@ -15,7 +15,7 @@ public class SpriteManager : MonoBehaviour
     {
         Passager.BodySet = BodySet;
         Passager.HeadSet = HeadSet;
-        Passager.HairSet = HeadSet;
+        Passager.HairSet = HairSet;
         Passager.DreamSet = DreamSet;        
         Passager.TipsSet = TipsSet;
         Passager.PantsSet = PantsSet;
