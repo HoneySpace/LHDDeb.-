@@ -22,9 +22,10 @@ public class Passager : MonoBehaviour
     {
 
     }
-    public Passager(int order)
+    public void SetOrder(int order)
     {
-        this.order = order;        
+        this.order = order;
+        
     }
     void Start()
     {
