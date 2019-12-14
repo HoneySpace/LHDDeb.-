@@ -6,16 +6,21 @@ public class SeatManager : MonoBehaviour
 {
     public int CountOfSeatsInX, CountOfSeatsInY;
     public GameObject Unit;
+    static Passager[] passagers;
     public float dx = 0.5f;
     public float dy = 1f;
     public float space = 1;
+    public static int Index;
+    int count;
     void Awake()
-    {        
-        int order = -98;
+    {
+        Index =Random.Range(0, CountOfSeatsInX * 2 * CountOfSeatsInY);
+        passagers = new Passager[CountOfSeatsInX * 2 * CountOfSeatsInY];
+        passagers[Index] = new Passager(true);
         for(int j=0; j<CountOfSeatsInY;j++)
             for(int i = 0; i < CountOfSeatsInX*2; i++)
             {
-                GameObject go;
+                GameObject go;                
                 if (i < CountOfSeatsInX)
                 {
                     go = Instantiate(Unit, new Vector3(i * dx, j * dy, 0), new Quaternion(), gameObject.transform);
@@ -26,9 +31,18 @@ public class SeatManager : MonoBehaviour
                     go = Instantiate(Unit, new Vector3(i * dx, j * dy, 0), new Quaternion(), gameObject.transform);
                     go.transform.localPosition = new Vector3(space/2 + (i- CountOfSeatsInX) * dx, j * dy, 0);
                 }                
-                Passager p = Unit.GetComponent<Passager>();
-                p.SetOrder(order);
-                order++;
+                Unit holder = go.GetComponent<Unit>();
+                if (count != Index)
+                {
+                    passagers[count] = new Passager(holder, false);
+                    holder.passager = passagers[count];
+                }
+                else
+                {
+                    holder.passager = passagers[Index];
+                    passagers[Index].SetHolder(holder);
+                }
+                count++;
             }
     }
 

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Terror 
+public class Unit : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Passager passager;
     void Start()
     {
-        
+        passager.Start();
     }
 
     // Update is called once per frame

@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour
 {
-    Enums
+    public enum GameState
+    {
+        Reading=0,
+        Playing=1
+    }
+    GameState State = GameState.Reading;
     // Start is called before the first frame update
     void Start()
     {
