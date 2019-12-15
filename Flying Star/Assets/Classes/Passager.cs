@@ -53,19 +53,19 @@ public class Passager : MonoBehaviour
             int CountTipTerror = 0;// Random.Range(1, 3);
             int CountDream = Random.Range(2, 5);
             Head = HeadSet[Random.Range(0, HeadSet.Length)];
-            CreateSprite(Head);
+            CreateSprite(Head,thatOrder-2);
             Hair = HairSet[Random.Range(0, HairSet.Length)];
-            CreateSprite(Hair);
+            CreateSprite(Hair, thatOrder - 1);
             Body = BodySet[Random.Range(0, BodySet.Length)];
-            CreateSprite(Body);
+            CreateSprite(Body, thatOrder - 1);
             Pants = PantsSet[Random.Range(0, PantsSet.Length)];
-            CreateSprite(Pants);
+            CreateSprite(Pants, thatOrder - 1);
             for (int i = 0; i < CountTip; i++)
             {
                 if (i < CountTipTerror)
-                    CreateSprite(TerrorTipsSet[Random.Range(0, TerrorTipsSet.Length)]);
+                    CreateSprite(TerrorTipsSet[Random.Range(0, TerrorTipsSet.Length)], thatOrder);
                 else
-                    CreateSprite(TipsSet[Random.Range(0, TipsSet.Length)]);
+                    CreateSprite(TipsSet[Random.Range(0, TipsSet.Length)], thatOrder);
             }
             //for(int i =0;i<CountDream;i++)
             //    Dreams[i] = DreamSet[Random.Range(0, DreamSet.Length)];
@@ -76,13 +76,13 @@ public class Passager : MonoBehaviour
             int CountTipTerror = Random.Range(1, 3);
             int CountDream = Random.Range(2, 5);
             Head = HeadSet[Random.Range(0, HeadSet.Length)];
-            CreateSprite(Head);
+            CreateSprite(Head,thatOrder-2);
             Hair = HairSet[Random.Range(0, HairSet.Length)];
-            CreateSprite(Hair);
+            CreateSprite(Hair,thatOrder-1);
             Pants = PantsSet[Random.Range(0, PantsSet.Length)];
-            CreateSprite(Pants);
+            CreateSprite(Pants,thatOrder-1);
             Body = BodySet[Random.Range(0, BodySet.Length)];
-            CreateSprite(Body);
+            CreateSprite(Body,thatOrder-1);
             TerrorTipsSet = new Sprite[4 + CountTip];
             TerrorTipsSet[0] = Head;
             TerrorTipsSet[1] = Hair;
@@ -91,23 +91,23 @@ public class Passager : MonoBehaviour
             for (int i = 0; i < CountTip; i++)
             {
                 Sprite s = TipsSet[Random.Range(0, TipsSet.Length)];
-                CreateSprite(s);
+                CreateSprite(s,thatOrder);
                 TerrorTipsSet[4 + i] = s;
             }
             //for(int i =0;i<CountDream;i++)
             //    Dreams[i] = DreamSet[Random.Range(0, DreamSet.Length)];
         }
     }
-    void CreateSprite(Sprite s)
+    void CreateSprite(Sprite s,int order)
     {
         GameObject tip = new GameObject();
-        tip.transform.parent = Holder.gameObject.transform;
+        tip.transform.parent = Holder.gameObject.GetComponentInChildren<Detector>().gameObject.transform;
         tip.transform.localScale = new Vector3(1, 1, 1);
         tip.transform.localPosition = new Vector3(0, 0, 0);
         tip.AddComponent<SpriteRenderer>();
         SpriteRenderer sr = tip.GetComponent<SpriteRenderer>();
         sr.sprite = s;
-        sr.sortingOrder = thatOrder;
+        sr.sortingOrder = order;
     }
 
 
