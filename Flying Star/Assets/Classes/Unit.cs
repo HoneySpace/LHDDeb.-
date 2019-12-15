@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour
     public MissingInfo missingInfo = new MissingInfo();
     public bool ItTer = false;
     Animator anim;
+    public bool Scarred = false;
     public float Sense = 3;
     State state=State.Stay;
     enum State
@@ -31,6 +32,7 @@ public class Unit : MonoBehaviour
             SeatManager.UpadateText();
             Handheld.Vibrate();
             anim.SetTrigger("Stay");
+            Scarred = false;
         }
     }
     // Update is called once per frame
@@ -42,13 +44,15 @@ public class Unit : MonoBehaviour
                 if (state == State.Stay)
                 {
                     state = State.Scarry;
-                    anim.SetTrigger("Scarry");                    
+                    anim.SetTrigger("Scarry");
+                    Scarred = true;
                 }
             }
             else
             {
                 if (state == State.Scarry)
                 {
+                    Scarred = false;
                     state = State.Stay;
                     anim.SetTrigger("Stay");
                 }

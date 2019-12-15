@@ -21,6 +21,7 @@ public class SeatManager : MonoBehaviour
     {
         Discription = GameObject.Find("Discript").GetComponent<Text>();
         Index =Random.Range(0, CountOfSeatsInX * 2 * CountOfSeatsInY);
+        Debug.Log($"Terr:{Index}");
         passagers = new Passager[CountOfSeatsInX * 2 * CountOfSeatsInY];
         passagers[Index] = new Passager(true);
         for (int j = 0; j < CountOfSeatsInY; j++)
